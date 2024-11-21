@@ -57,9 +57,9 @@ public class EmployeeService {
 
             EmployeeLIstDto employees = employeeServiceAdaptor.postEmployeeList();
 
-            LOGGER.info("Employees: " + employees.getList());
-            System.out.println("employees : >>>>>" + employees.getList() );
-            for (EmployeeDto dto : employees.getList()) {
+            LOGGER.info("Employees: " + employees.getEmployees());
+            System.out.println("employees : >>>>>" + employees.getEmployees() );
+            for (EmployeeDto dto : employees.getEmployees()) {
                 Employee employee = new Employee();
                 employee.employeeId = dto.getEmployeeId();
                 employee.employeeName = dto.getEmployeeName();
