@@ -1,6 +1,7 @@
 package com.tscode.adaptor;
 
 import com.tscode.model.dto.EmployeeDto;
+import com.tscode.model.dto.EmployeeLIstDto;
 import jakarta.ws.rs.POST;
 import jakarta.ws.rs.GET;
 import jakarta.ws.rs.Path;
@@ -22,9 +23,8 @@ public interface ExternalEmployeeServiceAdaptor {
 
     @GET
     @Path("/api-ext/list-employee")
-    @Consumes("application/json")
     @Produces("application/json")
-    List<EmployeeDto> postEmployeeList();
+    EmployeeLIstDto postEmployeeList();
 
 /*    public static class Response {
         public String message;
