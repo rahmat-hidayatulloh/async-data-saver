@@ -1,0 +1,13 @@
+{
+  "request": {
+    "method": "GET",
+    "url": "/api-ext/list-employee"
+  },
+  "response": {
+    "status": 200,
+    "bodyFileName": "employees-response.json",
+    "headers": {
+      "Content-Type": "application/json"
+    }
+  }
+}

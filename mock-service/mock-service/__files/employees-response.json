@@ -1,0 +1,116 @@
+{
+  "employees": [
+    {
+      "employeeId": 1,
+      "employeeName": "Mary",
+      "managerName": null,
+      "employeeFormat": "Mary",
+      "pathHierarchy": "Mary",
+      "pathLevel": 0
+    },
+    {
+      "employeeId": 2,
+      "employeeName": "Fred",
+      "managerName": "Mary",
+      "employeeFormat": "|__Fred",
+      "pathHierarchy": "Mary > Fred",
+      "pathLevel": 1
+    },
+    {
+      "employeeId": 3,
+      "employeeName": "Mary",
+      "managerName": "Fred",
+      "employeeFormat": "|__|__Mary",
+      "pathHierarchy": "Mary > Fred > Mary",
+      "pathLevel": 2
+    },
+    {
+      "employeeId": 4,
+      "employeeName": "Vilo",
+      "managerName": "Mary",
+      "employeeFormat": "|__|__|__Vilo",
+      "pathHierarchy": "Mary > Fred > Mary > Vilo",
+      "pathLevel": 3
+    },
+    {
+      "employeeId": 5,
+      "employeeName": "Mora",
+      "managerName": "Fred",
+      "employeeFormat": "|__|__Mora",
+      "pathHierarchy": "Mary > Fred > Mora",
+      "pathLevel": 2
+    },
+    {
+      "employeeId": 6,
+      "employeeName": "Bill",
+      "managerName": "Mora",
+      "employeeFormat": "|__|__|__Bill",
+      "pathHierarchy": "Mary > Fred > Mora > Bill",
+      "pathLevel": 3
+    },
+    {
+      "employeeId": 7,
+      "employeeName": "John",
+      "managerName": "Bill",
+      "employeeFormat": "|__|__|__|__John",
+      "pathHierarchy": "Mary > Fred > Mora > Bill > John",
+      "pathLevel": 4
+    },
+    {
+      "employeeId": 8,
+      "employeeName": "George",
+      "managerName": "Bill",
+      "employeeFormat": "|__|__|__|__George",
+      "pathHierarchy": "Mary > Fred > Mora > Bill > George",
+      "pathLevel": 4
+    },
+    {
+      "employeeId": 9,
+      "employeeName": "Chila",
+      "managerName": "George",
+      "employeeFormat": "|__|__|__|__|__Chila",
+      "pathHierarchy": "Mary > Fred > Mora > Bill > George > Chila",
+      "pathLevel": 5
+    },
+    {
+      "employeeId": 10,
+      "employeeName": "Moya",
+      "managerName": "George",
+      "employeeFormat": "|__|__|__|__|__Moya",
+      "pathHierarchy": "Mary > Fred > Mora > Bill > George > Moya",
+      "pathLevel": 5
+    },
+    {
+      "employeeId": 11,
+      "employeeName": "Silvy",
+      "managerName": "Mary",
+      "employeeFormat": "|__Silvy",
+      "pathHierarchy": "Mary > Silvy",
+      "pathLevel": 1
+    },
+    {
+      "employeeId": 12,
+      "employeeName": "Hans",
+      "managerName": "Silvy",
+      "employeeFormat": "|__|__Hans",
+      "pathHierarchy": "Mary > Silvy > Hans",
+      "pathLevel": 2
+    },
+    {
+      "employeeId": 13,
+      "employeeName": "Michael",
+      "managerName": "Silvy",
+      "employeeFormat": "|__|__Michael",
+      "pathHierarchy": "Mary > Silvy > Michael",
+      "pathLevel": 2
+    },
+    {
+      "employeeId": 14,
+      "employeeName": "Richard",
+      "managerName": "Silvy",
+      "employeeFormat": "|__|__Richard",
+      "pathHierarchy": "Mary > Silvy > Richard",
+      "pathLevel": 2
+    }
+  ]
+}
