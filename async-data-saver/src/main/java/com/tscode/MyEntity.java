@@ -1,30 +1,32 @@
 package com.tscode;
 
-import io.quarkus.hibernate.orm.panache.PanacheEntity;
 import jakarta.persistence.Entity;
-
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.Id;
 
 /**
- * Example JPA entity defined as a Panache Entity.
- * An ID field of Long type is provided, if you want to define your own ID field extends <code>PanacheEntityBase</code> instead.
+ * Example JPA entity.
  *
- * This uses the active record pattern, you can also use the repository pattern instead:
- * .
- *
- * Usage (more example on the documentation)
+ * To use it, get access to a JPA EntityManager via injection.
  *
  * {@code
+ *     @Inject
+ *     EntityManager em;
+ *
  *     public void doSomething() {
  *         MyEntity entity1 = new MyEntity();
  *         entity1.field = "field-1";
- *         entity1.persist();
+ *         em.persist(entity1);
  *
- *         List<MyEntity> entities = MyEntity.listAll();
+ *         List<MyEntity> entities = em.createQuery("from MyEntity", MyEntity.class).getResultList();
  *     }
  * }
  */
 @Entity
-public class MyEntity extends PanacheEntity {
+public class MyEntity {
+    @Id
+    @GeneratedValue
+    public Long id;
+
     public String field;
 }
-

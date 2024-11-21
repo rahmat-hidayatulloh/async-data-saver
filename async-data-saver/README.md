@@ -55,13 +55,30 @@ If you want to learn more about building native executables, please consult <htt
 
 ## Related Guides
 
-- REST resources for Hibernate ORM with Panache ([guide](https://quarkus.io/guides/rest-data-panache)): Generate Jakarta REST resources for your Hibernate Panache entities and repositories
+- REST ([guide](https://quarkus.io/guides/rest)): A Jakarta REST implementation utilizing build time processing and Vert.x. This extension is not compatible with the quarkus-resteasy extension, or any of the extensions that depend on it.
+- Hibernate ORM ([guide](https://quarkus.io/guides/hibernate-orm)): Define your persistent model with Hibernate ORM and Jakarta Persistence
+- JDBC Driver - H2 ([guide](https://quarkus.io/guides/datasource)): Connect to the H2 database via JDBC
+- REST Client ([guide](https://quarkus.io/guides/rest-client)): Call REST services
+- SmallRye OpenAPI ([guide](https://quarkus.io/guides/openapi-swaggerui)): Document your REST APIs with OpenAPI - comes with Swagger UI
 
 ## Provided Code
 
-### REST Data with Panache
+### Hibernate ORM
 
-Generating Jakarta REST resources with Panache
+Create your first JPA entity
 
-[Related guide section...](https://quarkus.io/guides/rest-data-panache)
+[Related guide section...](https://quarkus.io/guides/hibernate-orm)
 
+
+
+### REST Client
+
+Invoke different services through REST with JSON
+
+[Related guide section...](https://quarkus.io/guides/rest-client)
+
+### REST
+
+Easily start your REST Web Services
+
+[Related guide section...](https://quarkus.io/guides/getting-started-reactive#reactive-jax-rs-resources)
