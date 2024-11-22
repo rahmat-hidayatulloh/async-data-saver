@@ -1,8 +1,11 @@
 package com.tscode.model.dto;
 
-import lombok.Data;
+import lombok.*;
 
 @Data
+@AllArgsConstructor
+@NoArgsConstructor
+@Builder
 public class EmployeeDto {
     public Long employeeId;
     public String employeeName;

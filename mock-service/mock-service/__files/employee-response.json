@@ -1,0 +1,8 @@
+{
+  "employeeId": 6,
+  "employeeName": "Bill",
+  "managerName": "Mora",
+  "employeeFormat": "|__|__|__Bill",
+  "pathHierarchy": "Mary > Fred > Mora > Bill",
+  "pathLevel": 3
+}
