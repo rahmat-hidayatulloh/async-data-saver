@@ -3,7 +3,6 @@ package com.tscode.common.constant;
 public final class MessageConstants {
 
     private MessageConstants() {
-        // Private constructor to prevent instantiation
     }
 
     // General Messages

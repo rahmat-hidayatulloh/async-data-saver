@@ -27,24 +27,37 @@ public class EmployeeService {
     @Inject
     EmployeeRepository employeeRepository;
 
-    public CompletableFuture<Void> fetchAndSaveEmployee(Long employeeId) {
-        return CompletableFuture.runAsync(() -> {
-
-            validateEmployeeId(employeeId);
-
-            EmployeeDto employeeDto = fetchEmployeeFromAdaptor(employeeId, new EmployeeDto());
-            saveEmployee(mapDtoToEntity(employeeDto));
-
+    public CompletableFuture<EmployeeDto> fetchAndSaveEmployee(Long employeeId) {
+        return CompletableFuture.supplyAsync(() -> {
+            try {
+                validateEmployeeId(employeeId);
+                EmployeeDto employeeDto = fetchEmployeeFromAdaptor(employeeId);
+                saveEmployee(mapDtoToEntity(employeeDto));
+                return employeeDto;
+            } catch (Exception e) {
+                log.error("Error in fetchAndSaveEmployee: {}", e.getMessage(), e);
+                throw new RuntimeException(e);
+            }
         });
     }
 
-    public CompletableFuture<Void> saveEmployeeList() {
-        return CompletableFuture.runAsync(() -> {
-
-            for (EmployeeDto dto : fetchEmployeeListFromAdaptor(new EmployeeLIstDto())) {
-                saveEmployee(mapDtoToEntity(dto));
+    public CompletableFuture<List<EmployeeDto>> saveEmployeeList() {
+        return CompletableFuture.supplyAsync(() -> {
+            try {
+                List<EmployeeDto> employeeDtos = fetchEmployeeListFromAdaptor();
+                employeeDtos.forEach(dto -> saveEmployee(mapDtoToEntity(dto)));
+                return employeeDtos;
+            } catch (Exception e) {
+                log.error("Error in saveEmployeeList: {}", e.getMessage(), e);
+                throw new RuntimeException(e);
             }
         });
+    }
+
+    public Employee findEmployeeById(Long employeeId) {
+        validateEmployeeId(employeeId);
+        return employeeRepository.findByIdOptional(employeeId)
+                .orElseThrow(() -> new BusinessException(String.format("Employee with ID %d not found", employeeId)));
     }
 
     private Employee mapDtoToEntity(EmployeeDto dto) {
@@ -58,36 +71,47 @@ public class EmployeeService {
                 .build();
     }
 
-    private EmployeeDto fetchEmployeeFromAdaptor(Long employeeId, EmployeeDto employeeDto) {
-
+    private EmployeeDto fetchEmployeeFromAdaptor(Long employeeId) {
         try {
-            employeeDto = externalEmployeeServiceAdaptor.getSourceEmployee(employeeId);
+            EmployeeDto employeeDto = externalEmployeeServiceAdaptor.getSourceEmployee(employeeId);
             if (employeeDto == null) {
                 throw new BusinessException(String.format(MessageConstants.EMPLOYEE_FETCH_FAILED, employeeId));
             }
             return employeeDto;
-        } catch (Exception e){
-            log.error("Error fetching employee with ID {}: {}", employeeId, e.getMessage());
-            throw new RuntimeException(MessageConstants.EMPLOYEE_FETCH_FAILED, e);
+        } catch (Exception e) {
+            log.error("Error fetching employee from adaptor with ID {}: {}", employeeId, e.getMessage(), e);
+            throw new RuntimeException(e);
+        }
+    }
+
+    private List<EmployeeDto> fetchEmployeeListFromAdaptor() {
+        try {
+            EmployeeLIstDto employees = externalEmployeeServiceAdaptor.getSourceEmployeeList();
+            if (employees == null || employees.getEmployees().isEmpty()) {
+                throw new BusinessException(MessageConstants.EMPLOYEE_LIST_EMPTY);
+            }
+            return employees.getEmployees();
+        } catch (Exception e) {
+            log.error("Error fetching employee list from adaptor: {}", e.getMessage(), e);
+            throw new RuntimeException(e);
         }
     }
 
     private void validateEmployeeId(Long employeeId) {
-        if (employeeId == null || employeeId <= 0)
+        if (employeeId == null || employeeId <= 0) {
             throw new BusinessException(String.format(MessageConstants.INVALID_EMPLOYEE_ID, employeeId));
+        }
     }
 
     @Transactional
     public void saveEmployee(Employee employee) {
-        employeeRepository.persist(employee);
-    }
-
-    private List<EmployeeDto> fetchEmployeeListFromAdaptor(EmployeeLIstDto employees) {
-
-        employees = externalEmployeeServiceAdaptor.getSourceEmployeeList();
-        if (employees == null || employees.getEmployees().isEmpty()) {
-            throw new BusinessException(MessageConstants.EMPLOYEE_LIST_EMPTY);
+        try {
+            employeeRepository.persist(employee);
+            log.info("Employee with ID {} saved successfully", employee.getEmployeeId());
+        } catch (Exception e) {
+            log.error("Error saving employee with ID {}: {}", employee.getEmployeeId(), e.getMessage(), e);
+            throw new RuntimeException(e);
         }
-        return employees.getEmployees();
     }
 }
+
